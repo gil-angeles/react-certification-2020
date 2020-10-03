@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-
+import { useHistory } from "react-router-dom";
 import LoginStatus from '../Login/LoginStatus';
 import './VideoList.css';
 
 const VideoSelected = (props) => {
     const userData = LoginStatus();
-    const [favorite, setFavorite] = useState();    
+    const [favorite, setFavorite] = useState();
+    let history = useHistory();  
     const video = props.video;
     if(!video){
         return <div>Loading...</div>;
@@ -13,6 +14,8 @@ const VideoSelected = (props) => {
     
     const videoId = video.id.videoId;
     const url = `https://www.youtube.com/embed/${videoId}`;
+
+    //history.push('/video/' + videoId);
 
     const favoritePresent = () => {
       const favVideos = localStorage.getItem("favVideos") ? localStorage.getItem("favVideos") : null;
@@ -57,10 +60,6 @@ const VideoSelected = (props) => {
       
     };
 
-    
-
-    //setFavoriteExists(favoritePresent());
-    
     return (
       <div className="video-content">
         <div>
