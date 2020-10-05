@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import VideoSelected from '../components/Video/VideoSelected';
 import VideoListItem from '../components/Video/VideoListItem';
 import VideoGridItem from '../components/Video/VideoGridItem';
@@ -33,34 +33,61 @@ const videoListProps = {
           } ;
 
 
-describe("Video Selected", () => {
-  it("displays loading", () => {
-        render(<VideoSelected 
-        video={null} />);
-        expect(screen.getByText("Loading...")).toBeTruthy();
+describe('Video Selected', () => {
+  it('displays loading', () => {
+    render(<VideoSelected video={null} />);
+    expect(screen.getByText('Loading...')).toBeTruthy();
   });
 
-  it("displays video selected", () => {
-    render(<VideoSelected
-        video={videoListProps}
-        />);
+  it('displays video selected', () => {
+    render(<VideoSelected video={videoListProps} />);
 
-        expect(screen.getByText("Title Testing")).toBeTruthy();
-        expect(screen.getByText("Description Testing")).toBeTruthy();
-  }); 
+    expect(screen.getByText('Title Testing')).toBeTruthy();
+    expect(screen.getByText('Description Testing')).toBeTruthy();
+  });
 });
 
-describe("Video displayed in grid", () => {
-    it("displays video item list individually", () => {
-        render(<VideoListItem 
-          video={videoListProps} />);
-  
-        expect(screen.getByText("Title Testing")).toBeTruthy();
-    });
-    it("displays video item grid individually", () => {
-        render(<VideoGridItem 
-          video={videoListProps} />);
-  
-        expect(screen.getByText("Title Testing")).toBeTruthy();
-    });   
+describe('Video displayed in grid', () => {
+  it('displays video item list individually', () => {
+    render(<VideoListItem video={videoListProps} />);
+
+    expect(screen.getByText('Title Testing')).toBeTruthy();
+  });
+  it('displays video item grid individually', () => {
+    render(<VideoGridItem video={videoListProps} />);
+
+    expect(screen.getByText('Title Testing')).toBeTruthy();
+  });
+});
+
+describe('Displayed favorite button', () => {
+  it('displays add to favorite', () => {
+    render(<VideoSelected video={videoListProps} logged={true} />);
+
+    expect(screen.getByText('Add to favorites')).toBeTruthy();
+    expect(screen.queryAllByRole('button').length).toBe(1);
+  });
+
+  it('hides favorite button', () => {
+    render(<VideoSelected video={videoListProps} />);
+
+    expect(screen.queryByText('Add to favorites')).toBeFalsy();
+  });
+
+  it('adds favorite video', () => {
+    const addFavorite = jest.fn();
+    render(
+      <VideoSelected
+        video={videoListProps}
+        logged={true}         
+        addFavorite={addFavorite}
+      />
+    );
+
+    const button = screen.queryByRole('button');
+
+    fireEvent.click(button);
+
+    expect(addFavorite).toHaveBeenCalledTimes(1);
+  });
 });

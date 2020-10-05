@@ -2,16 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import VideoList from '../components/Video/VideoList';
 
-let container = null;
-
-beforeEach(() => {
-    // setup a DOM element as a render target
-    process.env = Object.assign(process.env, { REACT_APP_API_KEY:'AIzaSyANHO4_fHKcbu0tkEuoduttxrMxA33jXfA' });
-    // setup a DOM element as a render target
-    container = document.createElement("div");
-    document.body.appendChild(container);
-  });
-
   const videoListProps = [{
     "kind":"youtube#searchResult",
     "etag":"Jiak50jVoJ9_Uscl6Dwcb7VySqI",

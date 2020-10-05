@@ -1,23 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Toolbar from '../components/Toolbar/Toolbar'
 import Login from '../pages/Login';
 import { BrowserRouter } from 'react-router-dom';
 
 let container = null;
-
-const navigationProps = ( {
-  placeholder:"placeholderTest",
-  sideNavOpenHandler: "sideNavOpenHandlerTest"
-});
-
-beforeEach(() => {
-  // setup a DOM element as a render target
-  process.env = Object.assign(process.env, { REACT_APP_API_KEY:'AIzaSyANHO4_fHKcbu0tkEuoduttxrMxA33jXfA' });
-  // setup a DOM element as a render target
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
 
 describe("Navigation", () => {
 
@@ -35,5 +22,27 @@ describe("Login page", () => {
       render(<Login />);
       expect(screen.getAllByRole("button").length).toBe(2);
     });
+
+    it("checks button", () => {
+      /*const onSearch = jest.fn();
+      render(<Login onClick={onSearch} />);
+
+      const button = screen.getByText("Login");
+
+      fireEvent.click(button);
+
+      expect(onSearch).toHaveBeenCalledTimes(1);*/
+      const onSearch = jest.fn();
+
+      const wrapper = shallow(<Login
+        onClick={onSearch}
+      />);
+      //console.log(wrapper.debug())
+
+      //wrapper.find('button[type="button"]').at(0).simulate('click');
+      //wrapper.find('button[inputColor="rebeccapurple"]').at(0).simulate('click')
+      //expect(onSearch).toHaveBeenCalledTimes(1);
+
   });
+});
   

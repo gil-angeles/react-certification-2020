@@ -5,5 +5,17 @@
 import '@testing-library/jest-dom/extend-expect';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-
+import React from 'react';
+import Enzyme, {    
+    shallow,
+    mount,
+    render,
+  } from 'enzyme';
 configure({ adapter: new Adapter() });
+
+// Make Enzyme functions available in all test files without importing
+global.React = React;
+global.Enzyme = Enzyme;
+global.shallow = shallow;
+global.render = render;
+global.mount = mount;

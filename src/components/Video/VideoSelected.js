@@ -4,7 +4,13 @@ import LoginStatus from '../Login/LoginStatus';
 import './VideoList.css';
 
 const VideoSelected = (props) => {
-    const userData = LoginStatus();
+    let userData = null;
+    if(props.logged != undefined) {
+        userData = props.logged;
+    }
+    else{
+        userData = LoginStatus();
+    }
     const [favorite, setFavorite] = useState();
     let history = useHistory();  
     const video = props.video;
@@ -14,8 +20,6 @@ const VideoSelected = (props) => {
     
     const videoId = video.id.videoId;
     const url = `https://www.youtube.com/embed/${videoId}`;
-
-    //history.push('/video/' + videoId);
 
     const favoritePresent = () => {
       const favVideos = localStorage.getItem("favVideos") ? localStorage.getItem("favVideos") : null;
@@ -56,8 +60,6 @@ const VideoSelected = (props) => {
       else{
         setFavorite(!favorite);
       }
-     
-      
     };
 
     return (
