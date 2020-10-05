@@ -5,7 +5,13 @@ import LoginStatus from "../Login/LoginStatus";
 import './sideNav.css';
 
 const sideNav = props => {
-    const userData = LoginStatus();
+    let userData = null;
+    if(props.logged != undefined) {
+        userData = props.logged;
+    }
+    else{
+        userData = LoginStatus();
+    }
     var navBarClasses = 'side-nav';
     if (props.show) {
         navBarClasses = 'side-nav open';

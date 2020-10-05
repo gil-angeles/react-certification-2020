@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Link } from 'react-router-dom';
 import { useDetectOutsideClick } from "./useDetectOutsideClick";
 import LoginStatus from "../Login/LoginStatus";
 
@@ -48,7 +49,7 @@ const Profile = () => {
             <ul>              
               <li>                
               {userData !=null ?
-                <a href="/#" onClick={handleClickLogOut}>Log out</a> :  <a href="/login">Log in</a>}
+                <a href="/#" onClick={handleClickLogOut}>Log out</a> : <Link to= "/login"> Login </Link> }
               </li>
               
             </ul>

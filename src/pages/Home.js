@@ -72,9 +72,7 @@ const Home = () => {
     }
 
     const selectedVideoHandle = (video) => {
-        setSelectedVideo(video);
-        //setCurrentVideo(video);
-        //history.push('/video/' + video.id.videoId);
+        setSelectedVideo(video);        
         history.push('/video');
       }
 
