@@ -13,14 +13,16 @@ The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
 ## Description
+No bootstrap used, everything was created from scratch using CSS and React.<br />
 Site that interacts with youtube API V3. <br />
 To see Favorites links and Add Favorite button needs to be logged in. User / User<br />
-No bootstrap used, everything was created from scratch using CSS and React.<br />
 Styled components used for Login page.<br />
 In root folder, create the .env file with the Youtube API key to connect. REACT_APP_API_KEY=key
 <br />
 Live site: <br />
 https://practical-wescoff-38e9f5.netlify.app/ <br />
+
+https://ibb.co/mRQKxmt
 
 ### `npm test`
 
