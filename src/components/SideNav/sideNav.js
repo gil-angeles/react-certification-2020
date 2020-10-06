@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LoginStatus from "../Login/LoginStatus";
+import {LoginStatus} from "../Login/LoginStatus";
 
 import './sideNav.css';
 
 const sideNav = props => {
     let userData = null;
-    if(props.logged != undefined) {
+    if(props.logged !== undefined) {
         userData = props.logged;
     }
     else{

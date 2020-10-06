@@ -3,6 +3,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import VideoSelected from '../components/Video/VideoSelected';
 import VideoListItem from '../components/Video/VideoListItem';
 import VideoGridItem from '../components/Video/VideoGridItem';
+import { favoritePresent } from '../components/Video/VideoUtils';
+jest.mock('../components/Video/VideoUtils'); 
 
 const videoListProps = {
     "kind":"youtube#searchResult",
@@ -61,27 +63,23 @@ describe('Video displayed in grid', () => {
 });
 
 describe('Displayed favorite button', () => {
-  it('displays add to favorite', () => {
+  it('displays favorite button when logged', () => {
     render(<VideoSelected video={videoListProps} logged={true} />);
 
     expect(screen.getByText('Add to favorites')).toBeTruthy();
     expect(screen.queryAllByRole('button').length).toBe(1);
   });
 
-  it('hides favorite button', () => {
+  it('hides favorite button when not logged', () => {
     render(<VideoSelected video={videoListProps} />);
 
     expect(screen.queryByText('Add to favorites')).toBeFalsy();
   });
 
-  it('adds favorite video', () => {
+  it('add favorite video action', () => {
     const addFavorite = jest.fn();
     render(
-      <VideoSelected
-        video={videoListProps}
-        logged={true}         
-        addFavorite={addFavorite}
-      />
+      <VideoSelected video={videoListProps} logged={true} addFavorite={addFavorite} />
     );
 
     const button = screen.queryByRole('button');
@@ -89,5 +87,23 @@ describe('Displayed favorite button', () => {
     fireEvent.click(button);
 
     expect(addFavorite).toHaveBeenCalledTimes(1);
+  });
+
+  it('display add favorite button when video is not fav', () => {
+    favoritePresent.mockImplementation(() => false);
+    favoritePresent();
+
+    render(<VideoSelected video={videoListProps} logged={true} />);
+
+    expect(screen.getByText('Add to favorites')).toBeTruthy();
+  });
+
+  it('display remove favorite button when video is fav', () => {
+    favoritePresent.mockImplementation(() => true);
+    favoritePresent();
+
+    render(<VideoSelected video={videoListProps} logged={true} />);
+
+    expect(screen.getByText('Remove from favorites')).toBeTruthy();
   });
 });

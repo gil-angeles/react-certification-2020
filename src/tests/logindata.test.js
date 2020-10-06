@@ -10,8 +10,8 @@ jest.mock("../components/Login/LoginStatus", () => {
     };
 });
 
-describe("Profile data", () => {
-    it("checks name", () => {    
+describe("Profile data Response", () => {
+    it("checks name response", () => {    
       const result = LoginStatus();
       expect(result.name).toBe("test");
       expect(result.image).toBe("imageTest");
