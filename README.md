@@ -21,8 +21,9 @@ In root folder, create the .env file with the Youtube API key to connect. REACT_
 <br />
 Live site: <br />
 https://practical-wescoff-38e9f5.netlify.app/ <br />
-
-https://ibb.co/mRQKxmt
+Test coverage: <br/>
+![alt text](https://i.ibb.co/XWmPw9p/testcoverage.png)
+<br />
 
 ### `npm test`
 
